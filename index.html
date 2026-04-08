@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños 🎂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Segoe UI', serif;
+            background: linear-gradient(135deg, #e1bee7 0%, #ba68c8 50%, #9c27b0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(15px, 5vw, 20px);
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: clamp(30px, 8vw, 40px);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .balloon {
+            font-size: clamp(40px, 12vw, 60px);
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .balloon:nth-child(2) { animation-delay: 0.3s; }
+        .balloon:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title {
+            color: white;
+            font-size: clamp(2rem, 8vw, 3rem);
+            font-weight: 700;
+            margin-top: 20px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.8s ease-out 0.2s backwards;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin-top: 10px;
+            animation: slideDown 0.8s ease-out 0.4s backwards;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: clamp(20px, 4vw, 40px) clamp(15px, 3vw, 25px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 40px rgba(255, 20, 147, 0.3);
+            animation: slideUp 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid rgba(255, 20, 147, 0.2);
+            margin: 0 auto;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 3px;
+            background: linear-gradient(135deg, #ff1493, #ffb6c1, #ff69b4);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .memories-section {
+            margin-top: clamp(30px, 6vw, 40px);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: clamp(20px, 5vw, 30px);
+            border: 2px solid rgba(255, 20, 147, 0.9);
+            border-radius: 28px;
+            background: #ffffff;
+            box-shadow: 0 18px 40px rgba(255, 20, 147, 0.12);
+            backdrop-filter: blur(6px);
+        }
+
+        .memories-section h2 {
+            color: #ff1493;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 18px;
+        }
+
+        .video-section {
+            margin-top: clamp(30px, 6vw, 40px);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: clamp(20px, 5vw, 28px);
+            border: 2px solid rgba(255, 20, 147, 0.9);
+            border-radius: 28px;
+            background: #ffffff;
+            box-shadow: 0 18px 40px rgba(255, 20, 147, 0.12);
+        }
+
+        .video-section h2 {
+            color: #ff1493;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 18px;
+        }
+
+        .video-section video {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+
+        .memory-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .memory-card img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+
+        .memory-card p {
+            padding: 14px;
+            color: #333;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .confetti-piece {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            opacity: 0.9;
+            pointer-events: none;
+            z-index: 60;
+            border-radius: 2px;
+            animation: confettiFall linear forwards;
+            will-change: transform, opacity;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate3d(0, 100vh, 0) rotate(720deg);
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 20, 147, 0.15) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .date {
+            text-align: center;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            color: #ff1493;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .message {
+            color: #333;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            line-height: 1.8;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .emoji-pair {
+            font-size: clamp(50px, 15vw, 80px);
+            text-align: center;
+            margin: 30px 0;
+            animation: bounce 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.6));
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .separator {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff1493, #ff69b4, #ff1493, transparent);
+            margin: clamp(15px, 2vw, 20px) auto;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+        }
+
+        .letter {
+            background: linear-gradient(135deg, rgba(255, 192, 203, 0.1) 0%, rgba(255, 20, 147, 0.05) 100%);
+            border-left: 4px solid #ff1493;
+            padding: clamp(15px, 3vw, 20px);
+            margin: clamp(20px, 3vw, 25px) 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #555;
+            position: relative;
+            z-index: 1;
+        }
+
+        .letter p {
+            margin: clamp(8px, 1vw, 10px) 0;
+            line-height: 1.7;
+        }
+
+        .button-group {
+            display: flex;
+            gap: clamp(10px, 2vw, 15px);
+            justify-content: center;
+            margin-top: clamp(25px, 4vw, 30px);
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            color: white;
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 20, 147, 0.6);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #ff1493;
+            border: 2px solid #ff1493;
+        }
+
+        .btn-secondary:hover {
+            background: #ff1493;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .hidden-message {
+            display: none;
+            margin-top: clamp(15px, 3vw, 20px);
+            padding: clamp(15px, 3vw, 20px);
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.1) 0%, rgba(255, 105, 180, 0.1) 100%);
+            border-radius: 12px;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.5s ease-in;
+            border: 2px solid rgba(255, 20, 147, 0.2);
+        }
+
+        .hidden-message.show {
+            display: block;
+        }
+
+        .hidden-message p {
+            color: #555;
+            margin: clamp(8px, 1vw, 10px) 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart {
+            position: fixed;
+            font-size: clamp(20px, 5vw, 30px);
+            z-index: 0;
+            pointer-events: none;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) translateX(100px) rotate(360deg);
+            }
+        }
+
+        .petal {
+            position: fixed;
+            font-size: clamp(20px, 5vw, 30px);
+            z-index: 0;
+            pointer-events: none;
+            animation: fall 4s linear infinite;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: clamp(16px, 4vw, 24px);
+            border-radius: 16px;
+            width: min(90%, 420px);
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+            text-align: left;
+        }
+
+        .modal-content h2 {
+            color: #ff1493;
+            margin-bottom: 14px;
+        }
+
+        .modal-content p {
+            color: #333;
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            color: #ff1493;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .photo {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 15px;
+            margin: 15px auto;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+            border: 3px solid rgba(255, 20, 147, 0.2);
+            display: block;
+            animation: slideDown 0.8s ease-out 0.3s backwards;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .small-photo {
+            max-width: 300px;
+            opacity: 0.96;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                margin-bottom: 30px;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .memories-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        
+
+            .letter {
+                padding: 15px;
+                margin: 20px 0;
+            }
+
+            .separator {
+                margin: 20px auto;
+            }
+
+            .button-group {
+                margin-top: 30px;
+                gap: 10px;
+            }
+
+            .hidden-message {
+                padding: 15px;
+                margin-top: 20px;
+            }
+
+            .photo {
+                max-width: 280px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .memories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .title {
+                font-size: clamp(1.5rem, 10vw, 2rem);
+                letter-spacing: 1px;
+            }
+
+            .subtitle {
+                font-size: clamp(0.9rem, 4vw, 1rem);
+            }
+
+            .balloon {
+                font-size: clamp(28px, 10vw, 40px);
+            }
+
+            .card {
+                padding: clamp(15px, 4vw, 25px) clamp(12px, 3vw, 18px);
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 10px;
+                font-size: clamp(0.9rem, 3.5vw, 1rem);
+            }
+
+            .photo {
+                max-width: 100%;
+                margin: 10px auto;
+            }
+
+            .card::before {
+                animation-duration: 4s;
+            }
+
+            .modal-content {
+                width: min(95%, 380px);
+                max-height: 80vh;
+                overflow-y: auto;
+                padding: 14px;
+                font-size: clamp(0.85rem, 3vw, 1rem);
+                line-height: 1.5;
+            }
+
+            .modal-content p {
+                text-align: left;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 600px) {
+            body {
+                padding: 10px 8px;
+            }
+
+            .container {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .button-group {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .photo {
+                max-width: 240px;
+            }
+        }
+
+        /* Estilos para el modal de imagen */
+        #imageModal .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        #imageModal img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .close-image {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-image:hover {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div>
+                <span class="balloon">🎈</span>
+                <span class="balloon">🎂</span>
+                <span class="balloon">🎉</span>
+            </div>
+            <h1 class="title">¡Feliz Cumpleaños Mi Cachetona ❤️!</h1>
+        </div>
+
+        <div class="card">
+            <img src="https://i.postimg.cc/GhRD1bYV/liza.jpg" alt="Nosotros" class="photo small-photo">
+
+            <div class="button-group">
+                <button type="button" class="btn btn-primary" id="openModalBtn">haz click aqui 💌</button>
+                <button type="button" class="btn btn-primary" id="openOutingBtn">¿Aceptas una salida? 🎁</button>
+            </div>
+        </div>
+
+        <div class="memories-section">
+            <h2>Recuerdos especiales</h2>
+            <div class="memories-grid">
+                <div class="memory-card">
+                    <img src="liza 2.jpg" alt="Nuestro primer viaje juntos">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 3.gif" alt="Atardecer inolvidable">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 4.jpg" alt="Nuestro mejor abrazo">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 5.jpg" alt="Nuestro primer aniversario">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 6.jpg" alt="Nuestro día de picnic">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 7.jpg" alt="Nuestro momento de risa">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 8.jpg" alt="Nuestro día de playa">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 9.jpg" alt="Nuestro día de campo">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 10.jpg" alt="Nuestro día de parque">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 11.jpg" alt="Nuestro día de montaña">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 12.jpg" alt="Nuestro día de ciudad">
+                </div>  
+
+                <div class="memory-card">
+                    <img src="liza 13.jpg" alt="Nuestro día de campo">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 14.jpg" alt="Nuestro día de parque">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 17 .jpeg" alt="Nuestro día de montaña">
+                </div>
+
+                <div class="memory-card">
+                    <img src="Liza 18 .jpeg" alt="Nuestro día de ciudad">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="video-section">
+            <h2>Un video especial para ti 🎥</h2>
+            <video controls>
+                <source src="liza 15.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+
+            <video controls style="margin-top: 20px;">
+                <source src="liza 16.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
+
+    </div>
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Feliz cumpleaños!</h2>
+            <p>Liz, espero que disfrutes mucho este día especial. A pesar de todo, quiero que sepas que te amo profundamente y que eres lo mejor que me ha pasado en la vida. Gracias por ser tan linda conmigo y por aguantar mis enojos.</p>
+            
+            <p>Eres mi compañera, mi amiga y mi amor. Hemos pasado muchos momentos juntos y, lamentablemente, también hemos tenido muchos problemas como pareja. Te extraño mucho y sé que fallé, permitiendo que cargues el peso de nuestra familia cuando eso no debería ser así. Debimos haber repartido ese peso o permitir que solo yo lo cargara.</p>
+            
+            <p>Sé que no fue justo y que te hice sentir mal muchas veces. Pero quiero que sepas que nunca fue mi intención y que me arrepiento sinceramente de todo lo que hice mal. Te amo mucho y quiero estar contigo siempre, construyendo nuestra historia juntos y superando cualquier obstáculo que se nos presente.</p>
+            
+            <p style="font-weight: bold; color: #ff1493;">ESPERO QUE ME PERDONES POR TODO LO QUE HICE MAL Y QUE ME DES LA OPORTUNIDAD DE SEGUIR DEMOSTRÁNDOTE MI AMOR Y MI COMPROMISO CONTIGO. TE AMO MUCHO LIZ. ❤️</p>
+            
+            <p>Eres mi razón y mi felicidad. Feliz cumpleaños, mi vida.</p>
+        </div>
+    </div>
+
+    <div id="outingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-outing">&times;</span>
+            <h2>¿Nos aceptas? 🎉</h2>
+            <p>¿Aceptas salir conmigo y nuestro hijo para poder darte tu regalo especial? ✨</p>
+            <div class="button-group" style="margin-top: 20px;">
+                <button class="btn btn-primary" id="yesBtn">Sí, acepto ❤️</button>
+                <button class="btn btn-secondary" id="noBtn">No, gracias</button>
+            </div>
+            <div id="responseMessage" class="hidden-message"></div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMessage() {
+            const message = document.getElementById('specialMessage');
+            message.classList.toggle('show');
+        }
+
+        // Generar pétalos y corazones flotantes
+        function createFloatingElements() {
+            setInterval(() => {
+                const isHeart = Math.random() > 0.3;
+                const element = document.createElement('div');
+                
+                if (isHeart) {
+                    element.classList.add('heart');
+                    element.textContent = ['❤️', '💕', '💖', '💗', '💝'][Math.floor(Math.random() * 5)];
+                } else {
+                    element.classList.add('petal');
+                    element.textContent = '🌹';
+                }
+                
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.top = '-30px';
+                element.style.animationDuration = (3 + Math.random() * 2) + 's';
+                element.style.animationTimingFunction = 'ease-in';
+                document.body.appendChild(element);
+                
+                setTimeout(() => element.remove(), 5000);
+            }, 600);
+        }
+
+        createFloatingElements();
+
+        // Modal de mensaje principal
+        const modal = document.getElementById('messageModal');
+        const btn = document.getElementById('openModalBtn');
+        const closeBtn = document.querySelector('.close');
+
+        btn.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Modal de salida
+        const outingModal = document.getElementById('outingModal');
+        const outingBtn = document.getElementById('openOutingBtn');
+        const closeOutingBtn = document.querySelector('.close-outing');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const responseMessage = document.getElementById('responseMessage');
+
+        outingBtn.addEventListener('click', () => {
+            outingModal.style.display = 'block';
+            responseMessage.classList.remove('show');
+            responseMessage.innerHTML = '';
+        });
+
+        closeOutingBtn.addEventListener('click', () => {
+            outingModal.style.display = 'none';
+        });
+
+        yesBtn.addEventListener('click', () => {
+            responseMessage.innerHTML = '<p style="font-size: 1.1rem; color: #ff1493; font-weight: bold;">¡Excelente! 🎉 ¡Te amamos mucho! Prepárate para una sorpresa especial de mi parte y nuestro hijo. ❤️</p>';
+            responseMessage.classList.add('show');
+            yesBtn.disabled = true;
+            noBtn.disabled = true;
+            localStorage.setItem('outingResponse', 'accepted');
+            createConfetti();
+            window.open('https://wa.me/51900491006?text=¡Si aceptó salir nosotros 3 ! 🎉', '_blank');
+            updateMainButton();
+        });
+
+        noBtn.addEventListener('click', () => {
+            responseMessage.innerHTML = '<p style="font-size: 1.1rem; color: #ff69b4;">Está bien, pero nos encantaría pasar este momento especial contigo. 💕</p>';
+            responseMessage.classList.add('show');
+            yesBtn.disabled = true;
+            noBtn.disabled = true;
+            localStorage.setItem('outingResponse', 'declined');
+            window.open('https://wa.me/51900491006?text=No aceptó la salida 😭 ', '_blank');
+            updateMainButton();
+        });
+
+        function createConfetti() {
+            const colors = ['#ff1493', '#ff69b4', '#ffc0cb', '#ffb6c1', '#ff8da1', '#ffd700'];
+            const count = 60;
+            for (let i = 0; i < count; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                const size = Math.floor(Math.random() * 8) + 8;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-20px';
+                confetti.style.animationDuration = (2 + Math.random() * 1.5) + 's';
+                confetti.style.animationDelay = (Math.random() * 0.3) + 's';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 2400);
+            }
+        }
+
+        function updateMainButton() {
+            const response = localStorage.getItem('outingResponse');
+            if (!response) return;
+            openOutingBtn.textContent = response === 'accepted'
+                ? '¡Ya aceptaste la salida! ❤️'
+                : '¿Aceptas salir con nosotros? 😊';
+        }
+
+        updateMainButton();
+
+        window.addEventListener('click', (event) => {
+            if (event.target === outingModal) {
+                outingModal.style.display = 'none';
+            }
+        });
+
+        // Esperar a que la página cargue completamente
+        window.addEventListener('load', () => {
+            // Modal de imagen
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeImageBtn = document.querySelector('.close-image');
+
+            // Agregar event listeners a todas las imágenes de memories y la principal
+            document.querySelectorAll('.card img, .memories-grid img').forEach(img => {
+                img.addEventListener('click', (e) => {
+                    modalImage.src = img.src;
+                    imageModal.style.display = 'block';
+                });
+            });
+
+            closeImageBtn.addEventListener('click', () => {
+                imageModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === imageModal) {
+                    imageModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <!-- Modal para imagen ampliada -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-image">&times;</span>
+            <img id="modalImage" src="" alt="Imagen ampliada">
+        </div>
+    </div>
+
+</body>
+</html>
