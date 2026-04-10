@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,12 +40,24 @@
             animation: float 3s ease-in-out infinite;
         }
 
-        .balloon:nth-child(2) { animation-delay: 0.3s; }
-        .balloon:nth-child(3) { animation-delay: 0.6s; }
+        .balloon:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .balloon:nth-child(3) {
+            animation-delay: 0.6s;
+        }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
         @keyframes slideDown {
@@ -52,6 +65,7 @@
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -100,6 +114,38 @@
             mask-composite: exclude;
             opacity: 0.5;
             pointer-events: none;
+        }
+
+        .know-section {
+            margin-top: clamp(25px, 6vw, 35px);
+            padding: clamp(20px, 4vw, 32px);
+            background: #ffffff;
+            /* fondo blanco */
+            border: 2px solid rgba(255, 20, 147, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 14px 36px rgba(255, 20, 147, 0.1);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .know-section h2 {
+            color: #ff1493;
+            font-size: clamp(1.6rem, 4vw, 2rem);
+            margin-bottom: 14px;
+        }
+
+        .know-time {
+            font-size: clamp(1.4rem, 4vw, 1.75rem);
+            color: #7d1a65;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .know-text {
+            color: #4f2a4f;
+            font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+            line-height: 1.7;
         }
 
         .memories-section {
@@ -200,6 +246,7 @@
                 opacity: 1;
                 transform: translate3d(0, 0, 0) rotate(0deg);
             }
+
             100% {
                 opacity: 0;
                 transform: translate3d(0, 100vh, 0) rotate(720deg);
@@ -218,8 +265,13 @@
         }
 
         @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
         }
 
         @keyframes slideUp {
@@ -227,6 +279,7 @@
                 opacity: 0;
                 transform: translateY(40px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -264,8 +317,15 @@
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
         }
 
         .separator {
@@ -365,6 +425,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -384,6 +445,7 @@
                 opacity: 1;
                 transform: translateY(0) translateX(0) rotate(0deg);
             }
+
             100% {
                 opacity: 0;
                 transform: translateY(100vh) translateX(100px) rotate(360deg);
@@ -422,7 +484,7 @@
             width: min(90%, 420px);
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
             text-align: left;
         }
 
@@ -477,7 +539,7 @@
             .memories-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
-        
+
 
             .letter {
                 padding: 15px;
@@ -618,6 +680,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -637,6 +700,27 @@
                 <button type="button" class="btn btn-primary" id="openModalBtn">haz click aqui 💌</button>
                 <button type="button" class="btn btn-primary" id="openOutingBtn">¿Aceptas una salida? 🎁</button>
             </div>
+        </div>
+
+        <div class="know-section">
+            <h2>¿Como te conoci?</h2>
+            <p class="know-time" id="knowTime">Calculando...</p>
+            <p class="know-text">Desde que te vi aquel 24 de Marzo del 2019 en cumpleaños de Ruth y terminaste borracha
+                hasta el punto de besarme, desde hay comenzo nuestra historia de amor, hemos pasado por muchas cosas
+                juntos, momentos felices, momentos tristes, pero lo importante es que siempre hemos estado juntos y eso
+                es lo que importa, un 8 de abril te pedi para estar contigo y desde hay no me arrepiento de nada, te amo mucho mi amor.
+                En 2020 llego la pandemia y solo te pude ver una vez antes que de que declaren estado de emergencia,
+                desde ahi no sabia nada de ti.. Hasta el punto que no sabia si estabas bien o no
+                hasta que llegue al punto de escribirte al messenger sin importar que no estes en linea. Hasta que un
+                día me respondiste todos los mensajes que te escribí y desde ahi me senti aliviado y feliz de saber que
+                estabas bien, y desde hay no te deje de escribir ni un solo día,
+                luego quedamos en encontrarnos en el parque san martin y desde ahi nos volvimos más cercamos que nunca,
+                hemos pasado por muchas cosas buenas y malas como pareja pero siempre lo hemos superado juntos, y eso es
+                lo que importa. Te amo mucho mi amor.
+            </p>
+
+            <p class="know-text"> Siempre recordaré ese día que te vi por primera vez, ese día que me enamoré de ti, ese
+                día que supe que quería estar contigo para siempre. Te amo mucho mi amor, feliz cumpleaños.</p>
         </div>
 
         <div class="memories-section">
@@ -684,7 +768,7 @@
 
                 <div class="memory-card">
                     <img src="liza 12.jpg" alt="Nuestro día de ciudad">
-                </div>  
+                </div>
 
                 <div class="memory-card">
                     <img src="liza 13.jpg" alt="Nuestro día de campo">
@@ -702,6 +786,18 @@
                     <img src="Liza 18 .jpeg" alt="Nuestro día de ciudad">
                 </div>
 
+                <div class="memory-card">
+                    <img src="liza 19 .jpeg" alt="besitos">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 21.jpg" alt="besitos">
+                </div>
+
+                <div class="memory-card">
+                    <img src="liza 22.jpg" alt="besitos">
+                </div>
+
             </div>
         </div>
 
@@ -713,7 +809,7 @@
             </video>
 
             <video controls style="margin-top: 20px;">
-                <source src="liza 16.mp4" type="video/mp4">
+                <source src="liza 20 .mp4" type="video/mp4">
                 Tu navegador no soporta el elemento de video.
             </video>
         </div>
@@ -724,14 +820,22 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Feliz cumpleaños!</h2>
-            <p>Liz, espero que disfrutes mucho este día especial. A pesar de todo, quiero que sepas que te amo profundamente y que eres lo mejor que me ha pasado en la vida. Gracias por ser tan linda conmigo y por aguantar mis enojos.</p>
-            
-            <p>Eres mi compañera, mi amiga y mi amor. Hemos pasado muchos momentos juntos y, lamentablemente, también hemos tenido muchos problemas como pareja. Te extraño mucho y sé que fallé, permitiendo que cargues el peso de nuestra familia cuando eso no debería ser así. Debimos haber repartido ese peso o permitir que solo yo lo cargara.</p>
-            
-            <p>Sé que no fue justo y que te hice sentir mal muchas veces. Pero quiero que sepas que nunca fue mi intención y que me arrepiento sinceramente de todo lo que hice mal. Te amo mucho y quiero estar contigo siempre, construyendo nuestra historia juntos y superando cualquier obstáculo que se nos presente.</p>
-            
-            <p style="font-weight: bold; color: #ff1493;">ESPERO QUE ME PERDONES POR TODO LO QUE HICE MAL Y QUE ME DES LA OPORTUNIDAD DE SEGUIR DEMOSTRÁNDOTE MI AMOR Y MI COMPROMISO CONTIGO. TE AMO MUCHO LIZ. ❤️</p>
-            
+            <p>Liz, espero que disfrutes mucho este día especial. A pesar de todo, quiero que sepas que te amo
+                profundamente y que eres lo mejor que me ha pasado en la vida. Gracias por ser tan linda conmigo y por
+                aguantar mis enojos.</p>
+
+            <p>Eres mi compañera, mi amiga y mi amor. Hemos pasado muchos momentos juntos y, lamentablemente, también
+                hemos tenido muchos problemas como pareja. Te extraño mucho y sé que fallé, permitiendo que cargues el
+                peso de nuestra familia cuando eso no debería ser así. Debimos haber repartido ese peso o permitir que
+                solo yo lo cargara.</p>
+
+            <p>Sé que no fue justo y que te hice sentir mal muchas veces. Pero quiero que sepas que nunca fue mi
+                intención y que me arrepiento sinceramente de todo lo que hice mal. Te amo mucho y quiero estar contigo
+                siempre, construyendo nuestra historia juntos y superando cualquier obstáculo que se nos presente.</p>
+
+            <p style="font-weight: bold; color: #ff1493;">ESPERO QUE ME PERDONES POR TODO LO QUE HICE MAL Y QUE ME DES
+                LA OPORTUNIDAD DE SEGUIR DEMOSTRÁNDOTE MI AMOR Y MI COMPROMISO CONTIGO. TE AMO MUCHO LIZ. ❤️</p>
+
             <p>Eres mi razón y mi felicidad. Feliz cumpleaños, mi vida.</p>
         </div>
     </div>
@@ -760,7 +864,7 @@
             setInterval(() => {
                 const isHeart = Math.random() > 0.3;
                 const element = document.createElement('div');
-                
+
                 if (isHeart) {
                     element.classList.add('heart');
                     element.textContent = ['❤️', '💕', '💖', '💗', '💝'][Math.floor(Math.random() * 5)];
@@ -768,13 +872,13 @@
                     element.classList.add('petal');
                     element.textContent = '🌹';
                 }
-                
+
                 element.style.left = Math.random() * 100 + 'vw';
                 element.style.top = '-30px';
                 element.style.animationDuration = (3 + Math.random() * 2) + 's';
                 element.style.animationTimingFunction = 'ease-in';
                 document.body.appendChild(element);
-                
+
                 setTimeout(() => element.remove(), 5000);
             }, 600);
         }
@@ -876,7 +980,31 @@
         });
 
         // Esperar a que la página cargue completamente
+        function updateKnowTime() {
+            const startDate = new Date('2019-04-08T00:00:00');
+            const now = new Date('2026-03-28T00:00:00');
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            let days = now.getDate() - startDate.getDate();
+
+            if (days < 0) {
+                months -= 1;
+                const previousMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += previousMonth.getDate();
+            }
+
+            if (months < 0) {
+                years -= 1;
+                months += 12;
+            }
+
+            const knowTime = document.getElementById('knowTime');
+            knowTime.textContent = `Estuvimos ${years} años, ${months} meses y ${days} días juntos.`;
+        }
+
         window.addEventListener('load', () => {
+            updateKnowTime();
+
             // Modal de imagen
             const imageModal = document.getElementById('imageModal');
             const modalImage = document.getElementById('modalImage');
@@ -911,4 +1039,5 @@
     </div>
 
 </body>
+
 </html>
