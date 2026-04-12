@@ -699,6 +699,9 @@
             <div class="button-group">
                 <button type="button" class="btn btn-primary" id="openModalBtn">haz click aqui 💌</button>
                 <button type="button" class="btn btn-primary" id="openOutingBtn">¿Aceptas una salida? 🎁</button>
+                <button type="button" class="btn btn-secondary" onclick="irALuchemos()">
+                    Luchemos por lo nuestro 💖
+                </button>
             </div>
         </div>
 
@@ -854,6 +857,10 @@
     </div>
 
     <script>
+
+        function irALuchemos() {
+            window.location.href = "luchemos.html";
+        }
         function toggleMessage() {
             const message = document.getElementById('specialMessage');
             message.classList.toggle('show');
