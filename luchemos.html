@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luchemos ❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Georgia, serif;
+            background: radial-gradient(circle at top, #2b0030, #0d0012);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.7;
+            animation: moveStars linear infinite;
+        }
+
+        @keyframes moveStars {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            padding: 40px 25px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 50px rgba(255, 20, 147, 0.2);
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        h1 {
+            font-size: 2.7rem;
+            color: #ff69b4;
+            margin-bottom: 10px;
+        }
+
+        p {
+            line-height: 1.9;
+            font-size: 1.1rem;
+            margin: 18px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeText 0.8s forwards;
+        }
+
+        @keyframes fadeText {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .resaltar {
+            color: #ff69b4;
+            font-weight: bold;
+        }
+
+        .heart {
+            font-size: 60px;
+            animation: beat 1.2s infinite;
+            margin: 15px 0;
+        }
+
+        @keyframes beat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            color: white;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff1493;
+        }
+
+        .hidden {
+            display: none;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease;
+        }
+
+        /* NUEVA CARTA FINAL */
+        .final-letter {
+            margin-top: 40px;
+            padding: 25px;
+            border-radius: 15px;
+            background: rgba(255, 20, 147, 0.1);
+            border-left: 4px solid #ff1493;
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.2);
+            animation: fadeIn 1.2s ease;
+        }
+
+        .final-letter h2 {
+            color: #ff69b4;
+            margin-bottom: 15px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Ajustes generales */
+        .container {
+            width: 100%;
+            padding: clamp(15px, 4vw, 30px);
+            margin: 0 auto;
+        }
+
+        /* Tarjeta adaptable */
+        .card {
+            padding: clamp(20px, 5vw, 40px) clamp(15px, 4vw, 25px);
+            border-radius: clamp(18px, 4vw, 25px);
+        }
+
+        /* Título responsive */
+        h1 {
+            font-size: clamp(1.8rem, 6vw, 2.7rem);
+        }
+
+        /* Texto adaptable */
+        p {
+            font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+            line-height: 1.8;
+        }
+
+        /* Corazón adaptable */
+        .heart {
+            font-size: clamp(40px, 12vw, 60px);
+        }
+
+        /* Botones táctiles */
+        .btn {
+            width: 100%;
+            max-width: 320px;
+            font-size: clamp(0.9rem, 3.5vw, 1rem);
+            padding: 12px;
+        }
+
+        /* Carta final */
+        .final-letter {
+            padding: clamp(15px, 4vw, 25px);
+            border-radius: clamp(12px, 3vw, 15px);
+        }
+
+        /* ===== CELULARES PEQUEÑOS ===== */
+        @media (max-width: 480px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 18px 12px;
+            }
+
+            p {
+                margin: 14px 0;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+        }
+
+        /* ===== CELULARES EN HORIZONTAL ===== */
+        @media (orientation: landscape) and (max-height: 600px) {
+
+            .container {
+                margin: 10px auto;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+
+        }
+
+        /* ===== TABLETS ===== */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 700px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <div class="card">
+
+            <h1>💔➡️❤️ Luchemos</h1>
+            <div class="heart">❤️</div>
+
+            <p style="animation-delay:0.2s;">Luchemos por estar siempre juntos…</p>
+
+            <p style="animation-delay:0.4s;">
+                No siempre va a ser fácil. Habrá días en los que no nos entendamos,
+                días en los que el orgullo quiera hablar más fuerte que el corazón…
+            </p>
+
+            <p style="animation-delay:0.6s;">
+                Pero si algo tengo claro es esto:
+                <span class="resaltar">vale la pena luchar por lo nuestro.</span>
+            </p>
+
+            <p style="animation-delay:0.8s;">
+                No quiero un amor perfecto, quiero un amor real…
+                con errores, con discusiones, con momentos raros,
+                pero con dos personas que, aun enojadas,
+                sigan eligiéndose.
+            </p>
+
+            <p style="animation-delay:1s;">
+                Que en lugar de salir corriendo,
+                se sienten a arreglar las cosas.
+            </p>
+
+            <p style="animation-delay:1.2s;">
+                Luchemos por estar siempre juntos…
+                por hablar cuando algo molesta,
+                por abrazarnos cuando duela,
+                por pedir perdón cuando toque,
+                por no soltar la mano cuando el camino se ponga difícil.
+            </p>
+
+            <p style="animation-delay:1.4s;">
+                Porque al final del día,
+                de nada sirve ganar todas las peleas
+                si te pierdo a ti…
+            </p>
+
+            <p class="resaltar" style="animation-delay:1.6s;">
+                Prefiero aprender a bajar la voz,
+                respirar profundo…
+                y seguir caminando a tu lado ❤️
+            </p>
+
+            <button class="btn" onclick="mostrarExtra()">
+                Lee esto también 💌
+            </button>
+
+            <div id="extra" class="hidden">
+
+                <p>Mientras me quieras en tu vida, ahí estaré…</p>
+
+                <p>
+                    No como quien ocupa un espacio,
+                    sino como quien elige quedarse cada día.
+                </p>
+
+                <p>
+                    Me sentiré afortunado de caminar a tu lado,
+                    de abrazarte en tus silencios
+                    y celebrar contigo cada sonrisa.
+                </p>
+
+                <p>
+                    Valoraré tu compañía como lo más importante,
+                    cuidaré tu confianza,
+                    y amaré cada detalle de ti.
+                </p>
+
+                <p>
+                    Aprenderé tus gestos,
+                    seré tu apoyo en todo momento,
+                    y nunca dejaré de elegirte.
+                </p>
+
+                <p class="resaltar">
+                    Mientras me quieras… ahí estaré ❤️
+                </p>
+
+            </div>
+
+            <!-- CARTA FINAL -->
+            <div class="final-letter">
+                <h2>Para ti ❤️</h2>
+
+                <p>
+                    Amor… sé que hoy no estamos pasando por el mejor momento.
+                    Hay días en los que las cosas duelen, días en los que todo se complica,
+                    y otros en los que simplemente cuesta entendernos.
+                </p>
+
+                <p>
+                    Pero a pesar de todo eso, quiero que sepas algo…
+                    <span class="resaltar">mi corazón sigue firme.</span>
+                </p>
+
+                <p>
+                    Mi amor por ti no se apaga, no cambia, no se va.
+                    Sigue aquí, eligiéndote incluso en los días difíciles.
+                </p>
+
+                <p>
+                    Porque más allá de los problemas, de los errores o de las caídas…
+                    sigues siendo tú, la persona que quiero en mi vida.
+                </p>
+
+                <p class="resaltar">
+                    Te amaré… hasta el último día de mi vida. ❤️
+                </p>
+            </div>
+
+            <button class="btn" onclick="volver()">Volver 🎂</button>
+
+        </div>
+    </div>
+
+    <script>
+        function mostrarExtra() {
+            document.getElementById("extra").style.display = "block";
+        }
+
+        function volver() {
+            window.history.back();
+        }
+
+        const stars = document.getElementById("stars");
+        for (let i = 0; i < 100; i++) {
+            let s = document.createElement("div");
+            s.className = "star";
+            s.style.left = Math.random() * 100 + "vw";
+            s.style.top = Math.random() * 100 + "vh";
+            s.style.animationDuration = (3 + Math.random() * 5) + "s";
+            stars.appendChild(s);
+        }
+    </script>
+
+</body>
+
+</html>
